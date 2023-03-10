@@ -23,17 +23,9 @@ public class CarController {
 
     @GetMapping("/cars")
     public String getCars(ModelMap model, HttpServletRequest request) {
-        int count;
-        String valueParameter = request.getParameter("count");
+        String amount = request.getParameter("count");
 
-        if (valueParameter != null) {
-            count = Integer.parseInt(valueParameter);
-        } else {
-            count = 5;
-        }
-
-        List<Car> cars;
-        cars = carService.getCars(count);
+        List<Car> cars = carService.getCars(amount);
         model.addAttribute("cars", cars);
         return "cars";
     }

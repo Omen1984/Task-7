@@ -20,13 +20,24 @@ public class CarService {
         dataBaseCars.add(new Car("car5", 5, true));
     }
 
-    public List<Car> getCars(int AmountCars) {
-        if (AmountCars >= dataBaseCars.size() || AmountCars < 1) {
+    public List<Car> getCars(String amountCars) {
+        int amount;
+        if (amountCars != null) {
+            try {
+                amount = Integer.parseInt(amountCars);
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Попытка вставить в параметр count строку вместо числа");
+            }
+        } else {
+            amount = 5;
+        }
+
+        if (amount >= dataBaseCars.size() || amount < 1) {
             return new ArrayList<>(dataBaseCars);
         }
 
-        List<Car> cars = new ArrayList<>(AmountCars);
-        for (int i = 0; i < AmountCars; i++) {
+        List<Car> cars = new ArrayList<>(amount);
+        for (int i = 0; i < amount; i++) {
             cars.add(dataBaseCars.get(i));
         }
         return cars;
